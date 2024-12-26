@@ -1,0 +1,110 @@
+Software Requirement System
+
+Problem Statement: Inventory Management System
+
+Introduction
+The Inventory Management System (IMS) is designed to help store managers effectively manage their inventory by allowing them to add, update, delete, and search for items. The system will provide a user-friendly, menu-driven interface for all operations.
+
+Scope
+The scope of this project is to design, develop, and implement a Inventory Management System (IMS) which simplifies inventory tracking and ensures data consistency and efficient handling of item data.
+
+Functional Requirements
+ 1)Add Items:
+ This system allows users to add new items with unique IDs, names, quantities, and prices. It prevents adding more items when the inventory reaches its maximum capacity.
+The input gained from the user will be verified if the given information is not valid it displays “invalid information given” and asks for a valid input.
+If the input given already exists, the system asks for a unique input to be given.
+2)View Inventory: 
+This system displays all items in a tabular format showing ID, name, quantity, and price.
+3)Search Items: 
+This system searches for an item by its unique ID and displays its details. Provide feedback if the item is not found.
+If 
+4) Update Items:
+ The system allows modification of an existing item's details, including name, quantity, and price.
+5) Delete Items:
+It removes an item by ID and adjust the array to avoid empty gaps.
+6) Calculate Total Inventory Value:
+Compute the total value of items in stock using: Total Value = Σ (Quantity × Price).
+7) Exit Program:
+Provide an option to exit the program gracefully.
+
+Non-Functional Requirements
+
+1. Usability:
+Menu-driven interface with user-friendly prompts and error messages.
+
+2. Performance:
+Operations should execute within a reasonable time frame, even with the maximum capacity.
+
+3. Reliability:
+Ensure proper input validations to avoid invalid data or crashes.
+
+4. Maintainability:
+Modular design for easier future enhancements or debugging.
+
+Security
+1.Add items
+Description: Enables adding new item with unique details.Prevent duplicates or exceeding capacity 
+Inputs: Item ID, name, quantity, price. 
+Outputs: success or error message.
+
+
+2.We inventory 
+Description: Display all items in a well-formatted table.
+Inputs: None
+Outputs: Tabular list of items.
+
+
+3. Search Items
+Description: Searches for an item by its ID and displays its details.
+Inputs: Item ID.
+Outputs: Item details or error message.
+
+
+4. Update Items
+Description: Modifies details of an existing item.
+Inputs: Item ID, new name, quantity, price.
+Outputs: Success or error message.
+
+
+5. Delete Items
+Description: Deletes an item and shifts elements to avoid empty slots.
+Inputs: Item ID.
+Outputs: Success or error message.
+
+6. Calculate Total Inventory Value
+Description: Calculates the total value of all items in stock.
+Inputs: None.
+Outputs: Total inventory value.
+
+
+ System Design Constraints
+
+1. Maximum capacity of the inventory is 100 items.
+2. Item IDs must be unique.
+3. Console-based interface; no graphical user interface.
+4. The system does not persist data (data is lost upon exiting).
+
+
+Assumptions and Dependencies
+
+
+Users are expected to enter valid inputs when prompted.
+The system assumes no concurrent usage (single-user operation).
+A standard C compiler is available to compile the program.
+
+
+
+ Future Enhancements
+
+
+1. Integration with a database for persistent storage.
+2. Support for multi-user operations.
+3. Implementation of graphical user interface (GUI).
+4. Advanced reporting features (e.g., low stock alerts).
+
+
+
+
+ 
+
+
