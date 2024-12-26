@@ -1,0 +1,168 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_ITEMS 100  
+struct Item {
+    int id;
+    char name[50];
+    int quantity;
+    float price;
+};
+
+//  display menu
+void displayMenu() {
+    printf("\nInventory Management System\n");
+    printf("1. Add Item\n");
+    printf("2. Display All Items\n");
+    printf("3. Update Item\n");
+    printf("4. Delete Item\n");
+    printf("5. Search Item\n");
+    printf("6. Exit\n");
+    printf("Enter your choice: ");
+}
+
+//  add a new item 
+void addItem(struct Item inventory[], int *itemCount) {
+    if (*itemCount >= MAX_ITEMS) {
+        printf("Inventory is full, cannot add more items.\n");
+        return;
+    }
+
+    struct Item newItem;
+    printf("Enter item ID: ");
+    scanf("%d", &newItem.id);
+    getchar();  
+
+    printf("Enter item name: ");
+    fgets(newItem.name, sizeof(newItem.name), stdin);
+    newItem.name[strcspn(newItem.name, "\n")] = '\0';  
+
+    printf("Enter item quantity: ");
+    scanf("%d", &newItem.quantity);
+
+    printf("Enter item price: ");
+    scanf("%f", &newItem.price);
+
+    inventory[*itemCount] = newItem;
+    (*itemCount)++;
+    printf("Item added successfully.\n");
+}
+
+//  display all items 
+void displayItems(struct Item inventory[], int itemCount) {
+    if (itemCount == 0) {
+        printf("No items in the inventory.\n");
+        return;
+    }
+
+    printf("\nInventory List:\n");
+    printf("ID\tName\t\tQuantity\tPrice\n");
+    printf("----------------------------------------------\n");
+    for (int i = 0; i < itemCount; i++) {
+        printf("%d\t%s\t\t%d\t\t%.2f\n", inventory[i].id, inventory[i].name, inventory[i].quantity, inventory[i].price);
+    }
+}
+
+//  update an item 
+void updateItem(struct Item inventory[], int itemCount) {
+    int id;
+    printf("Enter item ID to update: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < itemCount; i++) {
+        if (inventory[i].id == id) {
+            printf("Enter new name: ");
+            getchar(); 
+            fgets(inventory[i].name, sizeof(inventory[i].name), stdin);
+            inventory[i].name[strcspn(inventory[i].name, "\n")] = '\0'; 
+
+            printf("Enter new quantity: ");
+            scanf("%d", &inventory[i].quantity);
+
+            printf("Enter new price: ");
+            scanf("%f", &inventory[i].price);
+
+            printf("Item updated successfully.\n");
+            return;
+        }
+    }
+
+    printf("Item with ID %d not found.\n", id);
+}
+
+// delete an item
+void deleteItem(struct Item inventory[], int *itemCount) {
+    int id;
+    printf("Enter item ID to delete: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < *itemCount; i++) {
+        if (inventory[i].id == id) {
+            for (int j = i; j < *itemCount - 1; j++) {
+                inventory[j] = inventory[j + 1];  // 
+            }
+            (*itemCount)--;  
+            printf("Item deleted successfully.\n");
+            return;
+        }
+    }
+
+    printf("Item with ID %d not found.\n", id);
+}
+
+//  search for an item 
+void searchItem(struct Item inventory[], int itemCount) {
+    int id;
+    printf("Enter item ID to search: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < itemCount; i++) {
+        if (inventory[i].id == id) {
+            printf("\nItem Found:\n");
+            printf("ID: %d\n", inventory[i].id);
+            printf("Name: %s\n", inventory[i].name);
+            printf("Quantity: %d\n", inventory[i].quantity);
+            printf("Price: %.2f\n", inventory[i].price);
+            return;
+        }
+    }
+
+    printf("Item with ID %d not found.\n", id);
+}
+
+int main() {
+    struct Item inventory[MAX_ITEMS];
+    int itemCount = 0;
+    int choice;
+
+    while (1) {
+        displayMenu();
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addItem(inventory, &itemCount);
+                break;
+            case 2:
+                displayItems(inventory, itemCount);
+                break;
+            case 3:
+                updateItem(inventory, itemCount);
+                break;
+            case 4:
+                deleteItem(inventory, &itemCount);
+                break;
+            case 5:
+                searchItem(inventory, itemCount);
+                break;
+            case 6:
+                printf("Exiting the program.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
